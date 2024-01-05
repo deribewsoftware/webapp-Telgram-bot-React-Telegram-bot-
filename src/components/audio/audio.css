@@ -1,0 +1,12 @@
+.circle {
+  border: none;
+  outline: none;
+  width: 40px;
+  height: 40px;
+  background-color: #3498db; /* Set your desired background color */
+  border-radius: 50%; /* Make it a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff; /* Set your desired text color */
+}

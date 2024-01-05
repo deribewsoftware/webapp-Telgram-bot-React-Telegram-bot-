@@ -1,24 +1,17 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useTheme } from './hooks/useTheme';
+
+import { router } from './router/router';
+import { RouterProvider } from 'react-router-dom';
+
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App " style={{ background: theme === 'light' ? '#fff' : '#031525', color: theme === 'light' ? '#000' : '#fff' }}>
+    <RouterProvider router={router} />
+   </div>
   );
 }
 

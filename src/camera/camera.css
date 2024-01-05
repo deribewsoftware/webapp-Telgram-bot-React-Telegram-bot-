@@ -1,0 +1,49 @@
+.photoLoading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: blue;
+  font-size: large;
+  
+
+}
+.photo{
+  position: relative;
+ 
+  padding: 10px;
+
+ 
+ 
+}
+.text{
+  background-color: aliceblue;
+  width: 400px;
+  /* padding: 10px;
+  height: auto !important; */
+ 
+  
+}
+.cameraPhoto{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+ 
+ overflow-y: scroll;
+  border: 2px solid gray;
+  border-radius: 10px;
+ padding-bottom: 100px;
+ 
+}
+.photo img{
+ width: 90%;
+  border-radius: 10px;
+  object-fit: contain;
+}
+.text-items{
+  padding: 10px;
+  justify-items: start;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
