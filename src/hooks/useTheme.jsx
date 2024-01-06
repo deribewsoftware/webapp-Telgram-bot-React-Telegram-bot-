@@ -7,6 +7,7 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('dark');
   const [language,setlanguage]=useState('amharic');
   const [data,setText]=useState(" ");
+  const [dataset,setDataSet]=useState({amaric:" ",geez:" "})
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -23,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
     setText(" ");
   };
   return (
-    <ThemeContext.Provider value={{resetData,textChange,data,language,languageChange, theme, toggleTheme }}>
+    <ThemeContext.Provider value={{dataset,setDataSet,resetData,textChange,data,language,languageChange, theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -27,11 +27,11 @@ ${currentPath==="/"? 'active':'link'}
 <p  className='label'>Chat</p>
 </Link>
 
-<Link to="/camera"  className={`
-${currentPath==="/camera"?'active':'link'}
+<Link to="/collection"  className={`
+${currentPath==="/collection"?'active':'link'}
 `}>
 <FaCamera size={24}/>
-<p  className='label'>Camera</p>
+<p  className='label'>Data Collection</p>
 </Link>
 
 

@@ -17,10 +17,41 @@ import { useTheme } from '../hooks/useTheme';
 import CameraComponent from '../camera/camera';
 import { useDropzone } from 'react-dropzone';
 
-
+import axios from 'axios';
 
 
 const Home = () => {
+
+
+
+
+  const sourceText = 'Hello, world!';
+  const targetLanguage = 'am'; // Amharic language code
+  const apiKey = "AIzaSyDaEYOR-Q2p_djMG8-QGWKHTIJvLs9aCqI";
+
+  useEffect(() => {
+    const translateText = async () => {
+      try {
+        const response = await axios.post(
+          `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
+          {
+            q: sourceText,
+            target: targetLanguage,
+            key: apiKey,
+          }
+        );
+
+        console.log(`Original text: ${sourceText}`);
+        console.log(`Translated text: ${response.data.data.translations[0].translatedText}`);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    translateText();
+  }, [apiKey, sourceText, targetLanguage]);
+
+ 
   const webcamRef = useRef(null);
   const [photo,setPhoto]=useState(null);
   const [text,setText]=useState(null);
