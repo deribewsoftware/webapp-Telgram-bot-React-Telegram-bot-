@@ -18,7 +18,7 @@ const Navbar = () => {
     <div className="flex justify-between " style={{width:'100%'}}>
     <div className='flex justify-between  ' style={{width:'80%'}}>
    <div className='font-bold'>
-   <select value={selectedValue} onChange={handleSelectChange} className={`bg-transparent  p-2 ${theme==='light'? 'text-black':'text-white'}`}>
+   <select value={selectedValue} onChange={handleSelectChange} className={`border-none outline-none bg-transparent  p-2 ${theme==='light'? 'text-black':'text-white'}`}>
         
         <option className={`bg-transparent text-black p-2`} value="amharic" >{language==='amharic'? 'ግእዝ':'Geez'}</option>
         <option className={`bg-transparent text-black p-2`} value="english"> {language==='amharic'? 'እንግሊዝኛ':'English'}</option>

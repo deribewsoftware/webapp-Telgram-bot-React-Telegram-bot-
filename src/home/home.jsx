@@ -1,7 +1,8 @@
 import React, {  useCallback, useEffect, useRef, useState } from 'react';
 import './home.css'
 import Tesseract from 'tesseract.js';
-import { AiFillAudio } from "react-icons/ai";
+
+
 
 
 import { FaRegShareFromSquare } from "react-icons/fa6";
@@ -50,6 +51,8 @@ const Home = () => {
 
     translateText();
   }, [apiKey, sourceText, targetLanguage]);
+
+
 
  
   const webcamRef = useRef(null);
@@ -120,7 +123,10 @@ useEffect(()=>{
   }
 },[text])
 
-
+const handleChangeInput=(e)=>{
+  setText(e.target.value);
+}
+console.log("text", text);
   return (<>  <div className="App flex justify-center">
    
   <div className='flex flex-col gap-20 width justify-center m-10  overflow-scroll-y'>
@@ -145,7 +151,7 @@ useEffect(()=>{
       </div>
       
       {!text&&<p>{data}</p>}
-       <TextArea value={text}/>
+       <TextArea value={text} onChange={handleChangeInput}/>
 
        <div className='flex justify-between mt-10'>
     <div>

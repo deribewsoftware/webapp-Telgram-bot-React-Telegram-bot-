@@ -5,7 +5,8 @@ import CameraComponent from '../camera/camera'
 import Photo from '../components/photo/photo'
 import Tesseract from 'tesseract.js'
 import { useTheme } from '../hooks/useTheme'
-
+import { CSVLink} from "react-csv";
+import useDrivePicker from 'react-google-drive-picker'
 const CollectionData = () => {
   const webcamRef = useRef(null);
   const [amPhoto,setAmPhoto]=useState(null)
@@ -14,8 +15,9 @@ const CollectionData = () => {
   const [geLoading,setGeLoading]=useState(false);
   const [amText,setAmText]=useState(null)
   const [geText,setGeText]=useState(null);
+  const [dataEntry,setDataEntry]=useState({geez:"",amaric:""});
   
-  const { language,data ,resetData,textChange,dataset,setDataSet} = useTheme()
+  const {  resetData,dataset,handleDataSave} = useTheme()
   
   
 const onCanceldata=()=>{
@@ -35,6 +37,7 @@ const onCanceldata=()=>{
          { logger: (info) => console.log(info) }
        ).then(({ data: { text } }) => {
          setAmText(text);
+         setDataEntry((prevData)=>({...prevData,amaric:text}));
          
        }).finally(() => {
          setAmLoading(false);
@@ -56,6 +59,7 @@ const onCanceldata=()=>{
          { logger: (info) => console.log(info) }
        ).then(({ data: { text } }) => {
          setGeText(text);
+         setDataEntry((prevData)=>({...prevData,geez:text.toString()}));
          
        }).finally(() => {
          setGeLoading(false);
@@ -73,14 +77,14 @@ const onCanceldata=()=>{
     setAmPhoto(imageSrc);
   }, [webcamRef]);
   
-  useEffect(()=>{
-    if(amText){
-      textChange(amText);
-    }
-    else{
-      resetData();
-    }
-  },[amText])
+  // useEffect(()=>{
+  //   if(amText){
+  //     textChange(amText);
+  //   }
+  //   else{
+  //     resetData();
+  //   }
+  // },[amText])
 
 
 
@@ -89,19 +93,42 @@ const onCanceldata=()=>{
     setGePhoto(imageSrc);
   }, [webcamRef]);
   
-  useEffect(()=>{
-    if(geText || amText){
-     setDataSet({...dataset,amaric:amText,geez:geText})
-    }
-    else{
-      resetData();
-    }
-  },[geText])
-
   
-  console.log("data set",dataset)
+  
+  console.log("data  entry",dataEntry)
+  console.log("data set :",dataset)
+
+  const handledataSave=()=>{
+    handleDataSave(dataEntry)
+  }
+
+
+
+  const [openPicker, authResponse] = useDrivePicker();  
+  // const customViewsArray = [new google.picker.DocsView()]; // custom view
+  const handleOpenPicker = () => {
+    openPicker({
+      clientId: "xxxxxxxxxxxxxxxxx",
+      developerKey: "xxxxxxxxxxxx",
+      viewId: "DOCS",
+      // token: token, // pass oauth token in case you already have one
+      showUploadView: true,
+      showUploadFolders: true,
+      supportDrives: true,
+      multiselect: true,
+      // customViews: customViewsArray, // custom view
+      callbackFunction: (data) => {
+        if (data.action === 'cancel') {
+          console.log('User clicked cancel/close button')
+        }
+        console.log(data)
+      },
+    })
+  }
+
   return (
-    <div className='p-3 mt-5 p-lg-5 p-sm-5  row justify-content-around gap-20 '>
+    <div className="">
+      <div className='p-3 mt-5 p-lg-5 p-sm-5  row justify-content-around gap-20 '>
         <div className="col-sm-12 col-lg-5 col-md-5">
       <Container>
         <div className="flex flex-col">
@@ -133,9 +160,7 @@ const onCanceldata=()=>{
          
           
         </div>
-       {geText&& <div className="">
-          <button className='btn btn-success mb-5' onClick={()=>{}}>Save Text</button>
-        </div>}
+      
         </div>
       </Container>
       
@@ -178,15 +203,25 @@ const onCanceldata=()=>{
          
           
         </div>
-       {amText&& <div className="">
-          <button className='btn btn-success mb-5' onClick={()=>{}}>Save Text</button>
-        </div>}
+       
         </div>
       </Container>
       
       </div>
 
       
+    </div>
+    <div className="flex justify-around px-4  w-full">
+      <button className='btn btn-primary' onClick={handledataSave}>Save data</button>
+
+      <CSVLink
+       data={dataset}
+       separator={";"} 
+       filename={"dataset.csv"}
+       className='btn btn-success'>
+    Download data
+</CSVLink>
+    </div>
     </div>
   )
 }

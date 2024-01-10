@@ -2,7 +2,7 @@
 import { useTheme } from '../../hooks/useTheme';
 import { CalculateTextareaHeight } from './textAreaHeight';
 import './textarea.css'
-const TextArea = ({value}) => {
+const TextArea = ({value,onChange}) => {
 
   
 
@@ -25,7 +25,7 @@ const TextArea = ({value}) => {
  
   const {theme}=useTheme()
   return ( <textarea 
-    onChange={autoIncreaseHeight}
+    onChange={onChange}
     className={`textarea ${theme==='light' ? 'text-black':'text-white'}`}
     style={{height:CalculateTextareaHeight()}} 
      defaultValue={value}/>);

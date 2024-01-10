@@ -110,3 +110,10 @@ body {
 /* .overflow-scroll-y{
   overflow-y: scroll;
 } */
+
+.border-none {
+  border: none !important;
+}
+.outline-none{
+  outline: none;
+}
