@@ -217,16 +217,7 @@ const onCanceldata=()=>{
     <div className="flex justify-around px-1  w-full">
       <button className='btn btn-primary' onClick={handledataSave}>Save data</button>
 
-      <CSVLink
-       data={dataset}
-       separator={";"} 
-       filename={"dataset.csv"}
-       className='btn btn-success'>
-    Download data
-</CSVLink>
-<div className="">
-  <button className='btn btn-warning' onClick={()=>handleOpenPicker()}>Open Picker</button>
-</div>
+      
     </div>
     </div>
   )
