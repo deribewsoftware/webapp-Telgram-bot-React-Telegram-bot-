@@ -105,11 +105,14 @@ const onCanceldata=()=>{
 
 
   const [openPicker, authResponse] = useDrivePicker();  
-  // const customViewsArray = [new google.picker.DocsView()]; // custom view
+  // const customViewsArray = [new google.picker.DocsView()]; 
+  // custom view
+
+ 
   const handleOpenPicker = () => {
     openPicker({
-      clientId: "xxxxxxxxxxxxxxxxx",
-      developerKey: "xxxxxxxxxxxx",
+      clientId: "642268051554-rn46ebfm72qckris2nejh1nicea4t8fp.apps.googleusercontent.com",
+      developerKey: "AIzaSyAHJ0-E4e3nMWjCvalKodHH7s_jzyB0f78",
       viewId: "DOCS",
       // token: token, // pass oauth token in case you already have one
       showUploadView: true,
@@ -221,6 +224,9 @@ const onCanceldata=()=>{
        className='btn btn-success'>
     Download data
 </CSVLink>
+<div className="">
+  <button onClick={()=>handleOpenPicker()}>Open Picker</button>
+</div>
     </div>
     </div>
   )

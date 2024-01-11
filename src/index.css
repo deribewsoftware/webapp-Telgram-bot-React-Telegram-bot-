@@ -82,9 +82,12 @@ body {
 
 .active{
   text-decoration: none !important;
-  color: cornflowerblue !important;
+background-color: cornflowerblue !important;
   font-size: large;
   font-weight: 800;
+ color: brown;
+ padding: 3px;
+ border-radius: 5px;
 }
 .link{
   text-decoration: none;
@@ -116,4 +119,7 @@ body {
 }
 .outline-none{
   outline: none;
+}
+.min-h-400{
+  min-height: 400px !important;
 }

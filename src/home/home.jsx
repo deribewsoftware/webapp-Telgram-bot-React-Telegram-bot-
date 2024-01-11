@@ -12,13 +12,15 @@ import TextArea from "../components/textarea/textarea";
 
 import Container from "../components/container/container";
 import { FaImage} from "react-icons/fa";
-import SpeechToText from '../components/audio/audio';
+
 import Navbar from '../components/navbar/navbar';
 import { useTheme } from '../hooks/useTheme';
 import CameraComponent from '../camera/camera';
 import { useDropzone } from 'react-dropzone';
 
 import axios from 'axios';
+import SpeechRecognition,{useSpeechRecognition} from "react-speech-recognition/lib/SpeechRecognition";
+import { AiFillAudio } from 'react-icons/ai';
 
 
 const Home = () => {
@@ -26,42 +28,17 @@ const Home = () => {
 
 
 
-  const sourceText = 'Hello, world!';
-  const targetLanguage = 'am'; // Amharic language code
-  const apiKey = "AIzaSyDaEYOR-Q2p_djMG8-QGWKHTIJvLs9aCqI";
-
-  useEffect(() => {
-    const translateText = async () => {
-      try {
-        const response = await axios.post(
-          `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
-          {
-            q: sourceText,
-            target: targetLanguage,
-            key: apiKey,
-          }
-        );
-
-        console.log(`Original text: ${sourceText}`);
-        console.log(`Translated text: ${response.data.data.translations[0].translatedText}`);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    translateText();
-  }, [apiKey, sourceText, targetLanguage]);
-
-
-
  
   const webcamRef = useRef(null);
   const [photo,setPhoto]=useState(null);
   const [text,setText]=useState(null);
+  const [geezData,setGeezData]=useState(null);
+  const [englishData,setEnglishData]=useState(null);
   
   const { language,data ,resetData,textChange} = useTheme()
 
   
+
 
   const onDrop = useCallback((acceptedFiles) => {
     
@@ -127,10 +104,81 @@ const handleChangeInput=(e)=>{
   setText(e.target.value);
 }
 console.log("text", text);
+
+
+
+const onTranslateGeez=useCallback(()=>{
+try{
+  axios.post('https://fasik.pythonanywhere.com/translate/geez',{geez_text:text}).then((response)=>{
+   setGeezData(response.data.translatedText)
+  });
+}
+
+catch(e){
+  console.log("translate error", e);
+}
+
+})
+
+
+const onTranslateEnglish=useCallback(()=>{
+  try{
+    axios.post('https://fasik.pythonanywhere.com/translate/english',{english_text:text}).then((response)=>{
+     setEnglishData(response.data.translatedText)
+     console.log(response.data);
+    });
+  }
+  
+  catch(e){
+    console.log("translate error", e);
+  }
+  
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const {
+    
+    transcript,
+    browserSupportsSpeechRecognition,
+   
+
+  }=useSpeechRecognition();
+ useEffect(() => {
+setText(transcript);
+  textChange(transcript);
+
+    if (browserSupportsSpeechRecognition) {
+      SpeechRecognition.lang = "am-ET"; // Set the language for speech recognition
+    }
+  }, [browserSupportsSpeechRecognition,transcript]);
+  if(!browserSupportsSpeechRecognition){
+    return <div className="">
+      your browser does't speech to text recognition
+    </div>
+  }
+
+
+
+
+
+
   return (<>  <div className="App flex justify-center">
    
   <div className='flex flex-col gap-20 width justify-center m-10  overflow-scroll-y'>
-   {/* <CameraComponent/> */}
+ 
   <Navbar/>
 
    <Container>
@@ -150,7 +198,7 @@ console.log("text", text);
         {Loading&& <div className='photoLoading'>Loading...</div>}
       </div>
       
-      {!text&&<p>{data}</p>}
+      {!text&&<p>{text}</p>}
        <TextArea value={text} onChange={handleChangeInput}/>
 
        <div className='flex justify-between mt-10'>
@@ -162,7 +210,7 @@ console.log("text", text);
      {language!=='amharic'&& (
      
       
-      <SpeechToText/>
+       <button className="circle btn btn-none bg-success text-white  px-1 mx-2" onClick={SpeechRecognition.startListening}><AiFillAudio size={30} /></button>
     
      )}
      
@@ -199,7 +247,9 @@ console.log("text", text);
      </div>
     </div>
     
-    {text&&<button className='btn btn-primary text-sm'>{language==='amharic'? 'ተርጉም':'Translate'}</button>}
+    {text&&language==='amharic'&&<button onClick={onTranslateGeez} className='btn btn-primary text-sm'>{language==='amharic'&&'ተርጉም'}</button>}
+
+    {text&&language!=='amharic'&&<button onClick={onTranslateEnglish} className='btn btn-primary text-sm'>{language!=='amharic'&&'Translate'}</button>}
      </div>
      </div>
 
@@ -210,7 +260,7 @@ console.log("text", text);
 
 
    <Container>
-     <div className='flex flex-col gap-10'>
+     <div className='flex flex-col gap-10 min-h-400'>
      <div className='flex justify-between'>
     <div className='font-bold'> አማርኛ</div>
     
@@ -218,9 +268,13 @@ console.log("text", text);
      </div>
 
      <div>
-      <p className='note'>
-     {data}
-      </p>
+     {geezData&&!englishData&& <p className='note'>
+     {geezData}
+      </p>}
+
+      {!geezData&&englishData&& <p className='note'>
+     {englishData}
+      </p>}
 
        <div className='flex justify-end mt-20'>
          <div className='flex justify-between mt-10'>
