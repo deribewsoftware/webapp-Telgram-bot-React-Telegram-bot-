@@ -21,7 +21,7 @@ const Layout = () => {
 ${currentPath==="/"? 'active':'link'}
 `}>
 <div className=""> <FaHome size={20}/></div>
-<p  className='label'>Data Translator</p>
+<p  className='label'>Translator</p>
 </Link>
 
 <Link to="/collection"  className={`

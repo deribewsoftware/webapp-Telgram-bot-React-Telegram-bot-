@@ -102,6 +102,7 @@ const onCanceldata=()=>{
     handleDataSave(dataEntry)
     setAmText(null);
     setGeText(null);
+    window.location.reload();
   }
 
 
@@ -144,8 +145,8 @@ const onCanceldata=()=>{
 
         {geLoading&& <div className='photoLoading'>Loading...</div>}
       </div>
-      <p>{geText}</p>
-        <TextArea/>
+      
+        <TextArea value={geText}/>
         <div className="flex ">
         {!gePhoto&&!geText&&<>  <div className=""><CameraComponent
      photo={gePhoto}
@@ -185,8 +186,8 @@ const onCanceldata=()=>{
 
         {amLoading&& <div className='photoLoading'>Loading...</div>}
       </div>
-      <p>{amText}</p>
-        <TextArea/>
+     
+        <TextArea value={amText}/>
         <div className="flex ">
         {!amPhoto&&!amText&&<>  <div className="">
         <CameraComponent

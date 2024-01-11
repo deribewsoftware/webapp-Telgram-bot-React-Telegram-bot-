@@ -65,6 +65,8 @@ const onCanceldata=()=>{
   setPhoto(null);
   setText(null);
   resetData();
+  setEnglishData(null);
+    setGeezData(null);
   
 }
 
@@ -142,6 +144,14 @@ const onTranslateEnglish=useCallback(()=>{
 
 
 
+  useEffect(() => {
+   setTimeout(() => {
+    if(!text){
+setText(null);
+    }
+     
+    })
+  }, [5000]);
 
 
 
@@ -205,9 +215,9 @@ setText(transcript);
         {Loading&& <div className='photoLoading font_style_large'>Loading...</div>}
       </div>
       
-      {!text&&<p className='font_style_large'> {text}</p>}
+      {/* {!text&&<p className='font_style_large'> {text}</p>} */}
        <div className="flex justify-center items-center">
-       <TextArea value={text? text:""} onChange={handleChangeInput}/>
+       <TextArea value={text|| null} onChange={handleChangeInput}/>
        </div>
 
        <div className='flex justify-between mt-10'>
