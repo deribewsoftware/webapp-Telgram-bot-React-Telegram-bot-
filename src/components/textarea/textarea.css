@@ -1,6 +1,12 @@
 .textarea{
   border: none;
+ 
   outline: none;
   background-color: transparent;
   width: 100%;
+  align-items: center;
+  font-size: larger;
+ min-height: 400px;
+ font-weight: 600;
+ justify-content: center;
 }

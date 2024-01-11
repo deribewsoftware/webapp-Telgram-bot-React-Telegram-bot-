@@ -225,7 +225,7 @@ const onCanceldata=()=>{
     Download data
 </CSVLink>
 <div className="">
-  <button onClick={()=>handleOpenPicker()}>Open Picker</button>
+  <button className='btn btn-warning' onClick={()=>handleOpenPicker()}>Open Picker</button>
 </div>
     </div>
     </div>

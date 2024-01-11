@@ -3,7 +3,11 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Josefin Sans', sans-serif;
 }
+
+
+  
 
 .flex{
   display: flex !important;
@@ -82,12 +86,7 @@ body {
 
 .active{
   text-decoration: none !important;
-background-color: cornflowerblue !important;
-  font-size: large;
-  font-weight: 800;
- color: brown;
- padding: 3px;
- border-radius: 5px;
+
 }
 .link{
   text-decoration: none;
@@ -122,4 +121,22 @@ background-color: cornflowerblue !important;
 }
 .min-h-400{
   min-height: 400px !important;
+}
+
+.amaric{
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+}
+
+.font_style_large{
+  font-weight: 500;
+  font-size: large;
+}
+.absolute{
+  position: absolute;
+}
+.bottom-0{
+  bottom: 10px;
+}
+.items-center{
+  align-items: center;
 }

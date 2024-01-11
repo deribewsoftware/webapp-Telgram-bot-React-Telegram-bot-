@@ -65,7 +65,7 @@ const onCanceldata=()=>{
   setPhoto(null);
   setText(null);
   resetData();
-  window.location.reload();
+  
 }
 
 
@@ -185,7 +185,7 @@ setText(transcript);
      <div className='flex flex-col gap-10'>
      <div className='flex justify-between '>
       
-    <div className='font-bold'> {language==='amharic'? 'ግእዝ':'English'}</div>
+    <div className='font_style_large font-bold'> {language==='amharic'? 'ግእዝ':'English'}</div>
     
     
      </div>
@@ -195,11 +195,13 @@ setText(transcript);
         {photo && (!text)&& <img src={photo} alt="photo"  className='w-300 h-400'/>}
 
 
-        {Loading&& <div className='photoLoading'>Loading...</div>}
+        {Loading&& <div className='photoLoading font_style_large'>Loading...</div>}
       </div>
       
-      {!text&&<p>{text}</p>}
-       <TextArea value={text} onChange={handleChangeInput}/>
+      {!text&&<p className='font_style_large'> {text}</p>}
+       <div className="flex justify-center items-center">
+       <TextArea value={text? text:""} onChange={handleChangeInput}/>
+       </div>
 
        <div className='flex justify-between mt-10'>
     <div>
@@ -238,8 +240,8 @@ setText(transcript);
 
      </div></>)}
      {(<>{photo&&(!text)&&<div className='flex justify-around gap-10'>
-     <button className='btn btn-danger  text-sm' onClick={onCanceldata}> {language==='amharic'? 'ሰርዝ':'Cancel'}</button>
-     <button className='btn btn-success text-sm' onClick={convertImageToText}> {language==='amharic'? 'ግወደ ጽሑፍ ቀይር':'convertTo Text'}</button>
+     <button className={`btn btn-danger  text-sm ${language==='amharic'&&"amaric"}`} onClick={onCanceldata}> {language==='amharic'? 'ሰርዝ':'Cancel'}</button>
+     <button className={`btn btn-success  text-sm ${language==='amharic'&&"amaric"}`} onClick={convertImageToText}> {language==='amharic'? 'ግወደ ጽሑፍ ቀይር':'convertTo Text'}</button>
      </div>}
      {text&&<button className="   btn btn-none bg-danger text-white text-sm mr-2 " onClick={onCanceldata}> {language==='amharic'? "ዳግም አስጀምር":"Reset"}</button>}</>)}
      
@@ -260,28 +262,30 @@ setText(transcript);
 
 
    <Container>
-     <div className='flex flex-col gap-10 min-h-400'>
+     <div className='flex flex-col gap-10 min-h-400 relative'>
      <div className='flex justify-between'>
-    <div className='font-bold'> አማርኛ</div>
+    <div className='font-bold font_style_large'> አማርኛ</div>
     
     
      </div>
 
      <div>
-     {geezData&&!englishData&& <p className='note'>
+     <div className="flex justify-center items-center">
+     {geezData&&!englishData&& <p className='note font_style_large'>
      {geezData}
       </p>}
 
-      {!geezData&&englishData&& <p className='note'>
+      {!geezData&&englishData&& <p className='note font_style_large'>
      {englishData}
       </p>}
+     </div>
 
        <div className='flex justify-end mt-20'>
-         <div className='flex justify-between mt-10'>
+         <div className='flex justify-between mt-10 absolute bottom-0 w-full'>
 
-<MdContentCopy size={24}/>
-<FaRegShareFromSquare size={24}/>
-<MdOutlineStarBorder size={24}/>
+<MdContentCopy size={30}/>
+<FaRegShareFromSquare size={30}/>
+<MdOutlineStarBorder size={30}/>
          </div>
     
      </div>

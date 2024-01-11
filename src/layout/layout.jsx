@@ -1,7 +1,4 @@
-import { AiFillAudio } from "react-icons/ai";
-import { FaCamera } from "react-icons/fa";
-import { GoHistory } from "react-icons/go";
-import { GrFavorite } from "react-icons/gr";
+import { FaHome } from "react-icons/fa";
 import { Link, Outlet,useLocation  } from "react-router-dom";
 
 
@@ -23,19 +20,7 @@ const Layout = () => {
 <Link to="/" className={`
 ${currentPath==="/"? 'active':'link'}
 `}>
-<div className=""><svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="32"
-      height="32"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 21l-4-4m4 0l-4 4m0-16l4 4m-4 0l4-4M7 4l-4 4m4 0L3 4m0 16l4-4m-4 0 4 4" />
-    </svg></div>
+<div className=""> <FaHome size={30}/></div>
 <p  className='label'>Data Translator</p>
 </Link>
 
