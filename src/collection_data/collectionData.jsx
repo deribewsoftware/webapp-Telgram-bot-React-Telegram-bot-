@@ -214,7 +214,7 @@ const onCanceldata=()=>{
 
       
     </div>
-    <div className="flex justify-around px-4  w-full">
+    <div className="flex justify-around px-1  w-full">
       <button className='btn btn-primary' onClick={handledataSave}>Save data</button>
 
       <CSVLink
