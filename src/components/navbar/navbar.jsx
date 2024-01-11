@@ -6,13 +6,9 @@ import { IoMoonOutline } from "react-icons/io5";
 import './navbar.css'
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({selectedValue,handleSelectChange}) => {
   const { theme, toggleTheme,language,languageChange } = useTheme();
-  const [selectedValue,setSelectedValue]=useState('amaric')
-  const handleSelectChange=(event)=>{
-    setSelectedValue(event.target.value);
-    languageChange(event.target.value)
-  }
+  
   
   return ( <Container>
     <div className="flex justify-between " style={{width:'100%'}}>

@@ -35,10 +35,10 @@ const Home = () => {
   const [geezData,setGeezData]=useState(null);
   const [englishData,setEnglishData]=useState(null);
   
-  const { language,data ,resetData,textChange} = useTheme()
+  const { language,data ,languageChange,resetData,textChange} = useTheme()
 
-  
-
+  const [selectedValue,setSelectedValue]=useState('amaric')
+ 
 
   const onDrop = useCallback((acceptedFiles) => {
     
@@ -173,13 +173,20 @@ setText(transcript);
 
 
 
+  const handleSelectChange=(event)=>{
+    setSelectedValue(event.target.value);
+    languageChange(event.target.value)
+    setText(null)
+    setEnglishData(null);
+    setGeezData(null);
+  }
 
 
   return (<>  <div className="App flex justify-center">
    
   <div className='flex flex-col gap-20 width justify-center m-10  overflow-scroll-y'>
  
-  <Navbar/>
+  <Navbar selectedValue={selectedValue} handleSelectChange={handleSelectChange}/>
 
    <Container>
      <div className='flex flex-col gap-10'>

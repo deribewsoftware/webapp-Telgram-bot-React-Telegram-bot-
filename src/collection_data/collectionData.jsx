@@ -100,6 +100,8 @@ const onCanceldata=()=>{
 
   const handledataSave=()=>{
     handleDataSave(dataEntry)
+    setAmText(null);
+    setGeText(null);
   }
 
 
