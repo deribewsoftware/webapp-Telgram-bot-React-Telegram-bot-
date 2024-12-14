@@ -23,6 +23,7 @@
     "react-webcam": "^7.2.0",
     "scss": "^0.2.4",
     "tesseract.js": "^5.0.4",
+    "translate_app": "file:",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

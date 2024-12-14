@@ -15,7 +15,10 @@ const CameraComponent = ({capture,webcamRef,convertImageToText,onCancel,photoLoa
  
 
 
-
+ // Video constraints to ensure the rear camera is used
+ const videoConstraints = {
+  facingMode: { exact: "environment" },
+};
   
 
 
@@ -50,6 +53,7 @@ const CameraComponent = ({capture,webcamRef,convertImageToText,onCancel,photoLoa
        audio={false}
        ref={webcamRef}
        screenshotFormat="image/jpeg"
+       videoConstraints={videoConstraints} // Rear camera setup
      />
      <button className='btn mt-20 btn-primary' onClick={capture}>Capture Photo</button>
      </div>}
