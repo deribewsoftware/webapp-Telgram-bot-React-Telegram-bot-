@@ -17,7 +17,7 @@ const CollectionData = () => {
   const [geText,setGeText]=useState(null);
   const [dataEntry,setDataEntry]=useState({geez:"",amaric:""});
   
-  const {  resetData,dataset,handleDataSave} = useTheme()
+  const {  resetData,dataset, handleDataSave} = useTheme()
   
   
 const onCanceldata=()=>{
@@ -98,11 +98,33 @@ const onCanceldata=()=>{
   console.log("data  entry",dataEntry)
   console.log("data set :",dataset)
 
-  const handledataSave=()=>{
-    handleDataSave(dataEntry)
-    setAmText(null);
-    setGeText(null);
-    window.location.reload();
+  const handledataSave= async () =>{
+    if (!dataEntry.geez || !dataEntry.amaric) {
+      alert("Both Geez and Amharic text are required.");
+      return;
+    }
+  
+    try {
+      // Replace this URL with your deployed Apps Script URL
+      const scriptUrl = "https://script.google.com/macros/s/AKfycbwTsMtr6MnegzaouOs0aBwyHmYO10DIwMzMGam-fPL1lpWw1ngjXbz1eLMspFu1QwmaBg/exec";
+  
+      const response = await fetch(scriptUrl, {
+        method: "POST",
+        body: JSON.stringify({
+          geezData: dataEntry.geez,
+          amharicData: dataEntry.amaric,
+        }),
+      });
+  
+      const result = await response.json();
+      handleDataSave(dataEntry)
+      setAmText(null);
+      setGeText(null);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error saving data:", error);
+      alert("Failed to save data. Please try again.");
+    }
   }
 
 
