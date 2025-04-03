@@ -131,8 +131,7 @@ const convertAmaricImageToText = () => {
     setIsSaving(true)
     try {
       // Replace this URL with your deployed Apps Script URL
-      // const scriptUrl = "https://script.google.com/macros/s/AKfycbwTsMtr6MnegzaouOs0aBwyHmYO10DIwMzMGam-fPL1lpWw1ngjXbz1eLMspFu1QwmaBg/exec";
-      const scriptUrl = "http://localhost:4000/sheet"
+      const scriptUrl = "https://script.google.com/macros/s/AKfycbwTsMtr6MnegzaouOs0aBwyHmYO10DIwMzMGam-fPL1lpWw1ngjXbz1eLMspFu1QwmaBg/exec";
   
       const response = await fetch(scriptUrl, {
         method: "POST",
