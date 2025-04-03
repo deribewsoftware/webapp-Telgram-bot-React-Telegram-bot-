@@ -2,9 +2,7 @@ import React, { useCallback} from 'react'
 import { useDropzone } from 'react-dropzone';
 import { FaImage } from 'react-icons/fa';
 
-const Photo = ({setPhoto}) => {
-  
-
+const Photo = ({setPhoto, onUpload}) => {
 
   const onDrop = useCallback((acceptedFiles) => {
     
@@ -15,10 +13,11 @@ const Photo = ({setPhoto}) => {
       const read=new FileReader();
       read.onload = () =>{
         setPhoto(read.result);
+        onUpload?.()
       }
       read.readAsDataURL(file )
     }
-  }, []);
+  }, [setPhoto, onUpload]);
 
 
 
