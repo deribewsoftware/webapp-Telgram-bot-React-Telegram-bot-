@@ -24,10 +24,6 @@ import { AiFillAudio } from 'react-icons/ai';
 
 
 const Home = () => {
-
-
-
-
  
   const webcamRef = useRef(null);
   const [photo,setPhoto]=useState(null);
@@ -155,7 +151,9 @@ setText(null);
 
 
 
-
+  const handleCropComplete = (croppedPhoto) => {
+    setPhoto(croppedPhoto);
+  };
 
 
 
@@ -179,9 +177,6 @@ setText(transcript);
       your browser does't speech to text recognition
     </div>
   }
-
-
-
 
   const handleSelectChange=(event)=>{
     setSelectedValue(event.target.value);
@@ -216,6 +211,7 @@ setText(transcript);
       </div>
       
       {/* {!text&&<p className='font_style_large'> {text}</p>} */}
+      
        <div className="flex justify-center items-center">
        <TextArea value={text|| null} onChange={handleChangeInput}/>
        </div>
@@ -242,8 +238,6 @@ setText(transcript);
      
     </div>
     
-
-
     
      <CameraComponent
      photo={photo}
@@ -253,6 +247,7 @@ setText(transcript);
      photoLoading={Loading}
      webcamRef={webcamRef}
      onCancel={onCanceldata}
+     onCropComplete={handleCropComplete}
      />
 
      </div></>)}

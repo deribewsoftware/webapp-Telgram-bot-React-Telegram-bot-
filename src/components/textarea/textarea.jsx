@@ -28,7 +28,7 @@ const TextArea = ({value,onChange}) => {
     onChange={onChange}
     className={`textarea ${theme==='light' ? 'text-black':'text-white'}`}
     style={{height:CalculateTextareaHeight()}} 
-     defaultValue={value}/>);
+    value={value || ''}/>);
 }
  
 export default TextArea;
