@@ -3,10 +3,11 @@ import Container from '../components/container/container'
 import TextArea from '../components/textarea/textarea'
 import CameraComponent from '../camera/camera'
 import Photo from '../components/photo/photo'
-import Tesseract from 'tesseract.js'
+import Tesseract, { detect } from 'tesseract.js'
 import { useTheme } from '../hooks/useTheme'
 import { CSVLink} from "react-csv";
 import useDrivePicker from 'react-google-drive-picker'
+import { detectText } from '../api/visionApi'
 
 const CollectionData = () => {
   const webcamRef = useRef(null);
@@ -31,19 +32,8 @@ const onCanceldata=()=>{
 
 const convertAmaricImageToText = () => {
     setAmLoading(true);
-    
-      Tesseract.recognize(
-        amPhoto,
-        'amh',
-         { logger: (info) => console.log(info) }
-       ).then(({ data: { text } }) => {
-         setAmText(text);
-         setDataEntry((prevData)=>({...prevData,amaric:text}));
-         
-       }).finally(() => {
-         setAmLoading(false);
-         setAmPhoto(null)
-       });
+
+    detectText(amPhoto, setAmText, setDataEntry, setAmLoading, setAmPhoto)
   };
 
   const [isAmCropping, setIsAmCropping] = useState(false);
@@ -60,19 +50,7 @@ const convertAmaricImageToText = () => {
   const convertGeezImageToText = () => {
    
     setGeLoading(true);
-    
-      Tesseract.recognize(
-        gePhoto,
-        'amh',
-         { logger: (info) => console.log(info) }
-       ).then(({ data: { text } }) => {
-         setGeText(text);
-         setDataEntry((prevData)=>({...prevData,geez:text.toString()}));
-         
-       }).finally(() => {
-         setGeLoading(false);
-         setGePhoto(null)
-       });
+    detectText(gePhoto, setGeText, setDataEntry, setGeLoading, setGePhoto)
     
   };
 
